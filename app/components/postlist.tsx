@@ -10,6 +10,7 @@ import { Trash2Icon } from "./deleteicon"
 import HeartIcon from "./hearticon";
 import ViewIcon from "./viewicon";
 import ThumbsDownIcon from "./dislikeicon";
+import { useTheme } from '../context/ThemeContext';
 
 const truncateText = (text: string, wordLimit: number) => {
     const words = text.split(' ');
@@ -21,6 +22,7 @@ const PostsList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,7 +55,7 @@ const PostsList: React.FC = () => {
     <div>
         <ul className="space-y-4">
         {posts.map((post) => (
-          <li key={post.id} className="bg-[#F5E0D8] rounded-lg p-4 md:p-6 cursor-pointer" onClick={() => handlePostClick(post.id)}>
+          <li key={post.id} className={` rounded-lg p-4 md:p-6 cursor-pointer ${theme === 'dark' ? 'bg-[#1f2937] text-white' : 'bg-[#F5E0D8] text-[#333]'}`}  onClick={() => handlePostClick(post.id)}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div>

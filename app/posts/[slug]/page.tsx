@@ -10,6 +10,7 @@ import { Post } from '../../types/post';
 import HeartIcon from '@/app/components/hearticon';
 import ViewIcon from '@/app/components/viewicon';
 import ThumbsDownIcon from '@/app/components/dislikeicon';
+import { useTheme } from '@/app/context/ThemeContext';
 
 const PostDetail: React.FC<{ params: { slug: number } }> = ({ params: { slug } }) => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const PostDetail: React.FC<{ params: { slug: number } }> = ({ params: { slug } }
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -41,7 +43,7 @@ const PostDetail: React.FC<{ params: { slug: number } }> = ({ params: { slug } }
 
   return (
     <main className="flex-1  flex flex-col justify-between p-6 md:p-8 lg:p-10">
-    <div className="flex-1 bg-[#F5E0D8] rounded-lg p-4 md:p-6">
+    <div className={`flex-1 bg-[#F5E0D8] rounded-lg p-4 md:p-6 ${theme === 'dark' ? 'bg-[#1f2937] text-white' : 'bg-[#F5E0D8] text-[#333]'}`}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div>
